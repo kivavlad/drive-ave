@@ -1,0 +1,79 @@
+@font-face {
+  font-display: swap; 
+  font-family: 'CeraProp';
+  font-style: normal;
+  font-weight: 400;
+  src: url('../assets/fonts/CeraPro-Regular.ttf'); 
+}
+
+@font-face {
+  font-display: swap; 
+  font-family: 'CeraProp';
+  font-style: normal;
+  font-weight: 700;
+  src: url('../assets/fonts/CeraPro-Bold.ttf');
+}
+
+@font-face {
+  font-display: swap; 
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 400;
+  src: url('../assets/fonts/Roboto.ttf'); 
+}
+
+@font-face {
+  font-display: swap; 
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 500;
+  src: url('../assets/fonts/Roboto-Medium.ttf'); 
+}
+
+@font-face {
+  font-display: swap; 
+  font-family: 'Circe';
+  font-style: normal;
+  font-weight: 700;
+  src: url('../assets/fonts/circe-bold.ttf'); 
+}
+
+:root {
+  /* Colors */
+  --white: #FFFFFF;
+  --black: #000000;
+  --orange: #E83801;
+  --gray-light: #E9E9E9;
+  --gray-medium: #515151;
+  --gray-text-light: #868686;
+  --gray-text-medium: #6B6B6B;
+  --blue: #2D6CB4;
+}
+
+body {
+  font-family: 'Roboto';
+  font-weight: 400;
+  color: var(--black);
+  background-color: var(--white);
+}
+
+.container {
+  max-width: 1320px;
+  margin: 0 auto;
+  padding: 0 10px;
+}
+
+body::-webkit-scrollbar {
+  width: .5rem;
+}
+
+body::-webkit-scrollbar-thumb {
+  background-color: var(--gray-medium);
+  height: 1rem;
+}
+
+body::-moz-progress-bar {
+  background-color: var(--gray-medium);
+  width: .5rem;
+  height: 1rem;
+}
