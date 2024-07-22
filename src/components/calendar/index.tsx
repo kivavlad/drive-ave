@@ -2,28 +2,21 @@ import {memo, useState} from 'react';
 import {motion} from 'framer-motion';
 import './style.css';
 
-interface CalendarProps {
-  openCalendar: boolean;
+interface IProps {
+  isOpen: boolean;
   onSelectPeriod: (startDate: Date, endDate: Date) => void;
 }
 
-const Calendar: React.FC<CalendarProps> = ({openCalendar, onSelectPeriod}) => {
+const Calendar: React.FC<IProps> = ({isOpen, onSelectPeriod}) => {
   const [startDate, setStartDate] = useState<Date | null>(null);
   const [endDate, setEndDate] = useState<Date | null>(null);
-
+  const weekDays = ['Пн.', 'Вт.', 'Ср.', 'Чт.', 'Пт', 'Сб', 'Вс'];
   const animation = {
-    hidden: {
-      y: -100,
-      opacity: 0,
-    },
-    visible: {
-      y: 0,
-      opacity: 1,
-    }
+    hidden: {y: -100, opacity: 0},
+    visible: {y: 0, opacity: 1}
   }
 
   const daysInMonth = (month: number, year: number) => new Date(year, month, 0).getDate();
-
   const getMonthName = (month: number) => {
     const date = new Date();
     date.setMonth(month - 1);
@@ -92,16 +85,15 @@ const Calendar: React.FC<CalendarProps> = ({openCalendar, onSelectPeriod}) => {
             }
 
             days.push(
-              <div key={`${w}-${d}`}
-                className={className}
+              <div key={`${w}-${d}`} className={className}
                 onClick={() => {
-                  // Если дата не в прошлом
                   if (date >= today) handleSelectDate(date);
                 }}
               >
                 {day}
               </div>
             )
+
             day++;
           }
         }
@@ -112,13 +104,9 @@ const Calendar: React.FC<CalendarProps> = ({openCalendar, onSelectPeriod}) => {
         <motion.div key={`${month}-${year}`} variants={animation} className="calendar-month">
           <div className="calendar-month-name">{`${monthName} ${year}`}</div>
           <div className="calendar-weekdays">
-            <div className="calendar-weekday">Пн</div>
-            <div className="calendar-weekday">Вт</div>
-            <div className="calendar-weekday">Ср</div>
-            <div className="calendar-weekday">Чт</div>
-            <div className="calendar-weekday">Пт</div>
-            <div className="calendar-weekday">Сб</div>
-            <div className="calendar-weekday">Вс</div>
+            {weekDays.map((weekDay, index) => (
+              <div key={index} className="calendar-weekday">{weekDay}</div>
+            ))}
           </div>
           <div className="calendar-days">{weeks}</div>
         </motion.div>
@@ -129,11 +117,7 @@ const Calendar: React.FC<CalendarProps> = ({openCalendar, onSelectPeriod}) => {
   }
 
   return (
-    <motion.div 
-      initial="hidden"
-      whileInView="visible"
-      className={openCalendar ? 'calendar' : 'hidden'}
-    >
+    <motion.div initial="hidden" whileInView="visible" className={isOpen ? 'calendar' : 'hidden'}>
       {renderCalendar()}
     </motion.div>
   )

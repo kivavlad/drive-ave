@@ -9,17 +9,17 @@ const Search: React.FC = () => {
   const dispatch = useAppDispatch();
   const calendarRef = useRef<any>();
   const data = useAppSelector(state => state.booking);
-  const [openCalendar, setOpenCalendar] = useState<boolean>(false);
+  const [isOpenCalendar, setIsOpenCalendar] = useState<boolean>(false);
 
   const callbacks = {
     // Открыть календарь
     onOpenCalendar: useCallback(() => {
-      if (!openCalendar) {
-        setOpenCalendar(true);
+      if (!isOpenCalendar) {
+        setIsOpenCalendar(true);
       } else {
-        setOpenCalendar(false);
+        setIsOpenCalendar(false);
       }
-    }, [openCalendar]),
+    }, [isOpenCalendar]),
     // Выбрать период
     onSelectPeriod: useCallback((startDate: Date, endDate: Date) => {
       dispatch(bookingActions.setDate(startDate.toISOString(), endDate.toISOString()))
@@ -29,7 +29,7 @@ const Search: React.FC = () => {
   // Закрыть календаль в любой точке экрана, кроме выбранной
   function handleClickOutside(e: MouseEvent) {
     if (calendarRef.current && !calendarRef.current.contains(e.target)) {
-      setOpenCalendar(false);
+      setIsOpenCalendar(false);
     }
   }
 
@@ -43,7 +43,7 @@ const Search: React.FC = () => {
   return (
     <div ref={calendarRef}>
       <SearchForm data={data} onOpenCalendar={callbacks.onOpenCalendar}/>
-      <Calendar openCalendar={openCalendar} onSelectPeriod={callbacks.onSelectPeriod}/>
+      <Calendar isOpen={isOpenCalendar} onSelectPeriod={callbacks.onSelectPeriod}/>
     </div>
   )
 }

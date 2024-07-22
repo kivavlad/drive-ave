@@ -30,6 +30,8 @@ const LoginForm: React.FC<IProps> = ({closeModal}) => {
     e.preventDefault();
     if (login.length && password.length) {
       onSubmit();
+      setLogin('');
+      setPassword('');
     }
   }
 

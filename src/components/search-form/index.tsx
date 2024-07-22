@@ -15,8 +15,12 @@ const SearchForm: React.FC<IProps> = ({data, onOpenCalendar}) => {
     onOpen: () => onOpenCalendar(),
   }
 
+  function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+  }
+
   return (
-    <form className={styles.form_wrapper}>
+    <form className={styles.form_wrapper} onSubmit={handleSubmit}>
       <div className={styles.form_option}>
         <label>Город или адрес</label>
         <input type="text"
